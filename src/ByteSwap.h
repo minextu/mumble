@@ -16,6 +16,9 @@
 # else
 #  include <QtCore/QtEndian>
 #  define SWAP64(x) qbswap<quint64>(x)
+#  define bswap_16(x) qbswap<quint16>(x)
+#  define bswap_32(x) qbswap<quint32>(x)
+#  define bswap_64(x) qbswap<quint64>(x)
 # endif
 #endif
 
