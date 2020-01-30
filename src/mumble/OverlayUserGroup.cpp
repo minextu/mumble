@@ -237,8 +237,8 @@ void OverlayUserGroup::moveUsers() {
 	const QRectF &sr = scene()->sceneRect();
 	const QPointF &p = qgeiHandle->pos();
 
-	os->fX = static_cast<float>(qBound(0.0, p.x() / sr.width(), 1.0));
-	os->fY = static_cast<float>(qBound(0.0, p.y() / sr.height(), 1.0));
+    os->fX = static_cast<float>(qBound(0.0, (double)p.x() / sr.width(), 1.0));
+    os->fY = static_cast<float>(qBound(0.0, (double)p.y() / sr.height(), 1.0));
 
 	qgeiHandle->setPos(os->fX * sr.width(), os->fY * sr.height());
 	updateUsers();
