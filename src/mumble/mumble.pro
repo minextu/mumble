@@ -532,18 +532,25 @@ unix {
     SOURCES += CoreAudio.cpp
     HEADERS += CoreAudio.h
   } else {
-    HEADERS *= GlobalShortcut_unix.h
-    SOURCES *= os_unix.cpp GlobalShortcut_unix.cpp Overlay_unix.cpp SharedMemory_unix.cpp Log_unix.cpp
+    SOURCES *= os_unix.cpp Overlay_unix.cpp SharedMemory_unix.cpp Log_unix.cpp
     
     !CONFIG(qtspeech) {
       SOURCES *= TextToSpeech_unix.cpp
     }
     
-    must_pkgconfig(x11)
+    !CONFIG(no-x11) {
+        must_pkgconfig(x11)
+        HEADERS *= GlobalShortcut_unix.h
+        SOURCES *= GlobalShortcut_unix.cpp
+        LIBS *= -lXi
+    } else {
+        HEADERS *= GlobalShortcut_noop.h
+        SOURCES *= GlobalShortcut_noop.cpp
+    }
+
     linux* {
       LIBS *= -lrt
     }
-    LIBS *= -lXi
 
     !CONFIG(no-oss) {
       CONFIG  *= oss
