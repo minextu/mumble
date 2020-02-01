@@ -12,7 +12,7 @@
 // We define a global macro called 'g'. This can lead to issues when included code uses 'g' as a type or parameter name (like protobuf 3.7 does). As such, for now, we have to make this our last include.
 #include "Global.h"
 
-static const char *mumble_sink_input = "Mumble Speakers";
+static const char *mumble_sink_input = "Virtual Stream for MainVolume Volume Control";
 static const char *mumble_echo = "Mumble Speakers (Echo)";
 
 static PulseAudioSystem *pasys = NULL;
@@ -83,12 +83,14 @@ PulseAudioSystem::PulseAudioSystem() {
 	pa_proplist *proplist;
 
 	proplist = pa_proplist_new();
-	pa_proplist_sets(proplist, PA_PROP_APPLICATION_NAME, "Mumble");
+    pa_proplist_sets(proplist, PA_PROP_APPLICATION_NAME, "Mumble");
 	pa_proplist_sets(proplist, PA_PROP_APPLICATION_ID, "net.sourceforge.mumble.mumble");
-	pa_proplist_sets(proplist, PA_PROP_APPLICATION_ICON_NAME, "mumble");
-	pa_proplist_sets(proplist, PA_PROP_MEDIA_ROLE, "game");
+    pa_proplist_sets(proplist, PA_PROP_APPLICATION_ICON_NAME, "harbour-mumble");
+   // pa_proplist_sets(proplist, PA_PROP_APPLICATION_PROCESS_BINARY, "telepathy-stream-engine");
+    pa_proplist_sets(proplist, PA_PROP_MEDIA_ROLE, "phone");
 
-	pacContext = pa_context_new_with_proplist(api, NULL, proplist);
+
+    pacContext = pa_context_new_with_proplist(api, NULL, proplist);
 	pa_proplist_free(proplist);
 
 	pa_context_set_subscribe_callback(pacContext, subscribe_callback, this);

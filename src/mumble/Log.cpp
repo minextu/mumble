@@ -627,7 +627,7 @@ void Log::processDeferredLogs() {
 
 // Post a notification using the MainWindow's QSystemTrayIcon.
 void Log::postQtNotification(MsgType mt, const QString &plain) {
-	if (g.mw->qstiIcon->isSystemTrayAvailable() && g.mw->qstiIcon->supportsMessages()) {
+    if (false && g.mw->qstiIcon->supportsMessages()) {
 		QSystemTrayIcon::MessageIcon msgIcon;
 		switch (mt) {
 			case DebugInfo:

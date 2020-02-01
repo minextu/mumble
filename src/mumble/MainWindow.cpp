@@ -491,7 +491,7 @@ void MainWindow::hideEvent(QHideEvent *e) {
 #ifdef Q_OS_UNIX
 	if (! qApp->activeModalWidget() && ! qApp->activePopupWidget())
 #endif
-		if (g.s.bHideInTray && qstiIcon->isSystemTrayAvailable() && e->spontaneous())
+        if (g.s.bHideInTray && false && e->spontaneous())
 			QMetaObject::invokeMethod(this, "hide", Qt::QueuedConnection);
 	QMainWindow::hideEvent(e);
 #endif
@@ -502,7 +502,7 @@ void MainWindow::showEvent(QShowEvent *e) {
 #ifdef Q_OS_UNIX
 	if (! qApp->activeModalWidget() && ! qApp->activePopupWidget())
 #endif
-		if (g.s.bHideInTray && qstiIcon->isSystemTrayAvailable() && e->spontaneous())
+        if (g.s.bHideInTray && false && e->spontaneous())
 			QMetaObject::invokeMethod(this, "show", Qt::QueuedConnection);
 #endif
 	QMainWindow::showEvent(e);
@@ -518,7 +518,7 @@ void MainWindow::changeEvent(QEvent *e) {
 	// So, let's not do it on macOS.
 
 #else
-	if (isMinimized() && qstiIcon->isSystemTrayAvailable() && g.s.bHideInTray) {
+    if (isMinimized() && false && g.s.bHideInTray) {
 		// Workaround http://qt-project.org/forums/viewthread/4423/P15/#50676
 		QTimer::singleShot(0, this, SLOT(hide()));
 	}
@@ -1250,7 +1250,7 @@ void MainWindow::on_qmServer_aboutToShow() {
 	// Don't add qaHide on macOS.
 	// There is no way to bring the window back (no 'tray' for Mumble on macOS),
 	// and the system has built-in hide functionality via Cmd-H.
-	if (qstiIcon->isSystemTrayAvailable())
+    if (false)
 		qmServer->addAction(qaHide);
 #endif
 	qmServer->addAction(qaQuit);

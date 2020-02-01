@@ -299,9 +299,9 @@ Settings::Settings() {
 	bHideInTray = (winVer < QSysInfo::WV_WINDOWS7);
 #else
 	const bool isUnityDesktop = QProcessEnvironment::systemEnvironment().value(QLatin1String("XDG_CURRENT_DESKTOP")) == QLatin1String("Unity");
-	bHideInTray = !isUnityDesktop && QSystemTrayIcon::isSystemTrayAvailable();
+    bHideInTray = !isUnityDesktop && false;
 #endif
-	bStateInTray = true;
+    bStateInTray = true;
 	bUsage = true;
 	bShowUserCount = false;
 	bChatBarUseSelection = false;
